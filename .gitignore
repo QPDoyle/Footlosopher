@@ -1,0 +1,14 @@
+# Dependencies 
+node_modules/
+
+# Secrets
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Build outputs 
+build/
+dist/
+.next/
+out/
