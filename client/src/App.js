@@ -1,20 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import { NavLink, Routes, Route } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import About from './pages/About';
 
+const Navigation = () => (
+  <nav>
+    <ul>
+      <li><NavLink to='/Home'>Home</NavLink></li>
+      <li><NavLink to='/About'>About</NavLink></li>
 
+    </ul>
+  </nav>
+);
 
-const Person = {
-  name: "Joe Devine", 
-  src: "https://pbs.twimg.com/profile_images/1970602489142444032/jBYU5QiW_400x400.jpg",
-  alt: "Joe Devine"
-}
-
-function Avatar(props) {
-  return(<img src={props.src} alt={props.alt}/>)
-}
+const Main = () => (
+  <Routes>
+    <Route path='/Home' element={<Home />} />
+    <Route path='/About' element={<About />} />
+  </Routes>
+);
 
 function App() {
   const [backendData, setBackendData] = useState([{}])
+
   useEffect(() => {
     fetch("/api").then(
       response => response.json()
@@ -24,9 +33,10 @@ function App() {
       }
     )
   }, [])
+
   return (
     <div>
-      <Avatar src={Person.src} alt={Person.alt} />
+      <Navigation />
       {(typeof backendData.users === 'undefined') ? (
         <p>Loading...</p>
       ) : (
@@ -34,8 +44,9 @@ function App() {
           <p key={i}>{user}</p>
         ))
       )}
+      <Main />
     </div>
   )
 }
 
-export default App
+export default App;
