@@ -1,11 +1,29 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const axios = require('axios');
 
 app.get("/api", (req, res) => {
-    res.json({"users": ["user1", "user2", "user3"] });
+  res.json({"users": ["user1", "user2", "user3"]});
 });
+
+app.get("/api/fixtures", async (req, res) => {
+    try {
+      const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
+        headers: {
+          'x-apisports-key': process.env.API_KEY
+        },
+        params: {
+          id: req.query.id
+        }
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch fixtures' });
+    }
+  });
 
 app.listen(5001, () => {
-    console.log('Server is running on port 5000')
+  console.log('Server is running on port 5001')
 });
-
