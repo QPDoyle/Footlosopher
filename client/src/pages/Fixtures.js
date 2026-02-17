@@ -4,17 +4,27 @@ function Fixtures() {
   const [fixtureId, setFixtureId] = useState('');
   const [fixture, setFixture] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchFixture = () => {
+    if (!fixtureId) return;
     setLoading(true);
+    setFixture(null);
+    setError(null);
+
     fetch(`/api/fixtures?id=${fixtureId}`)
       .then(res => res.json())
       .then(data => {
-        setFixture(data.response[0]);
+        if (data.response && data.response.length > 0) {
+          setFixture(data.response[0]);
+        } else {
+          setError('No fixture found for that ID');
+        }
         setLoading(false);
       })
       .catch(err => {
         console.error(err);
+        setError('Something went wrong');
         setLoading(false);
       });
   };
@@ -31,6 +41,7 @@ function Fixtures() {
       <button onClick={fetchFixture}>Search</button>
 
       {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
 
       {fixture && (
         <div>
