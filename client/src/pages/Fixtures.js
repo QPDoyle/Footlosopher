@@ -4,10 +4,13 @@ function Fixtures() {
   const [fixtures, setFixtures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [league, setLeague] = useState("");
 
-  const season = 2024, league = 39;
+  const season = 2025
 
   const fetchFixtures = () => {
+    setLoading(true);
+    setError(null);
     fetch(`/api/fixtures?league=${league}&season=${season}`)
       .then(res => res.json())
       .then(data => {
@@ -37,7 +40,17 @@ function Fixtures() {
 
   return (
     <div>
+      <select
+        name="leagues"
+        id="leagues"
+        value={league}
+        onChange={(e) => setLeague(e.target.value)}>
+        <option value="39">Premier League</option>
+        <option value="140">La Liga</option>
+        <option value="78">Bundesliga</option>
+      </select>
       <h1>Fixtures</h1>
+      
       <button onClick={fetchFixtures}>Load Fixtures</button>
 
       {loading && <p>Loading...</p>}
