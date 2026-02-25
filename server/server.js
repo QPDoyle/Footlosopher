@@ -14,7 +14,9 @@ app.get("/api/fixtures", async (req, res) => {
           'x-apisports-key': process.env.API_KEY
         },
         params: {
-          id: req.query.id
+          season: req.query.season,
+          league: req.query.league,
+          status: "FT"
         }
       });
       res.json(response.data);
