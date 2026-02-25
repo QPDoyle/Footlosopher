@@ -31,7 +31,7 @@ function Fixtures() {
     const awayGoals = f.goals.away;
     console.log(homeGoals, awayGoals);
     if (homeGoals > awayGoals) return { home: '#90EE90', away: '#FF6B6B' };
-    if (awayGoals > homeGoals) return { home: '#FF6B6B', away: '#90EE90' };
+    else if (awayGoals > homeGoals) return { home: '#FF6B6B', away: '#90EE90' };
     return { home: '', away: '' };
   };
 
@@ -63,7 +63,7 @@ function Fixtures() {
                 <td>{new Date(f.fixture.date).toLocaleDateString()}</td>
                 <td style={{ backgroundColor: colors.home}}>{f.teams.home.name}</td>
                 <td>{f.goals.home} - {f.goals.away}</td>
-                <td style={{ backgroundColor: colors.home}}>{f.teams.away.name}</td>
+                <td style={{ backgroundColor: colors.away}}>{f.teams.away.name}</td>
                 <td>{f.fixture.venue.name}</td>
                 <td>{f.fixture.status.long}</td>
               </tr>
