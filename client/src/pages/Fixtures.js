@@ -6,7 +6,7 @@ function Fixtures() {
   const [error, setError] = useState(null);
   const [league, setLeague] = useState("");
 
-  const season = 2025
+  const season = 2024
 
   const fetchFixtures = () => {
     setLoading(true);
@@ -35,7 +35,8 @@ function Fixtures() {
     console.log(homeGoals, awayGoals);
     if (homeGoals > awayGoals) return { home: '#90EE90', away: '#FF6B6B' };
     else if (awayGoals > homeGoals) return { home: '#FF6B6B', away: '#90EE90' };
-    return { home: '', away: '' };
+    else;
+      return { home: '#808080', away: '#808080' };
   };
 
   return (
