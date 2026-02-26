@@ -3,10 +3,6 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 
-app.get("/api", (req, res) => {
-  res.json({"users": ["user1", "user2", "user3"]});
-});
-
 app.get("/api/fixtures", async (req, res) => {
     try {
       const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
