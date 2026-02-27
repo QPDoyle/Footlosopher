@@ -1,22 +1,43 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
+function TeamLogo({ team_id }) {
+  return <img src={`https://media.api-sports.io/football/teams/${team_id}.png`} alt="Team Logo" />;
+}
+
 function TeamStats() {
   const { teamId } = useParams();
   const [searchParams] = useSearchParams();
   const league = searchParams.get('league');
   const season = searchParams.get('season');
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/team/${teamId}?league=${league}&season=${season}`)
-      .then(res => res.json())
-      .then(data => setStats(data.response));
+    setLoading(true);
+
+    const params = new URLSearchParams();
+    if (league) params.set('league', league);
+    if (season) params.set('season', season);
+
+    fetch(`/api/team/${teamId}?${params.toString()}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+        return res.json();
+      })
+      .then(data => setStats(data.response))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
   }, [teamId, league, season]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      <h1>Team {teamId}</h1>
+      <TeamLogo team_id={teamId} />
+      <h1>{stats.team.name}</h1>
       <pre>{JSON.stringify(stats, null, 2)}</pre>
     </div>
   );

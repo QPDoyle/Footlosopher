@@ -351,6 +351,23 @@
   color: var(--muted);
 }
 
+.team-name {
+  text-decoration: none;
+  color: inherit;
+}
+
+.winner .team-name {
+  color: #4caf50; /* green */
+}
+
+.loser .team-name {
+  color: #888; /* grey */
+}
+
+.draw .team-name {
+  color: #888; /* grey */
+}
+
 .home-cell { text-align: right; }
 .away-cell { text-align: left; }
 

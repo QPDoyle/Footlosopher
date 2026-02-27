@@ -126,7 +126,8 @@ function Fixtures() {
                           })}
                         </td>
                         <td className={`team-cell home-cell ${result === 'home' ? 'winner' : result === 'away' ? 'loser' : ''}`}>
-                          <NavLink to={`/team/${f.teams.home.id}?league=${league}&season=${season}`}>
+                          <NavLink to={`/team/${f.teams.home.id}?league=${league}&season=${season}`}
+                          className={() => "team-name"}>
                             {f.teams.home.name}
                           </NavLink>
                         </td>
@@ -142,7 +143,8 @@ function Fixtures() {
                           )}
                         </td>
                         <td className={`team-cell away-cell ${result === 'away' ? 'winner' : result === 'home' ? 'loser' : ''}`}>
-                          <NavLink to={`/team/${f.teams.away.id}?league=${league}&season=${season}`}>
+                          <NavLink to={`/team/${f.teams.away.id}?league=${league}&season=${season}`}
+                          className={() => "team-name"}>
                             {f.teams.away.name}
                           </NavLink>
                         </td>
