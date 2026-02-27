@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Fixtures.css';
+import { NavLink } from 'react-router-dom';
 
 function Fixtures() {
   const [fixtures, setFixtures] = useState([]);
@@ -42,7 +43,7 @@ function Fixtures() {
     if (a > h) return 'away';
     return 'draw';
   };
-
+  
   return (
     <div className="app">
       <div className="noise" />
@@ -51,7 +52,7 @@ function Fixtures() {
         <div className="header-inner">
           <div className="header-left">
             <span className="logo-dot" />
-            <h1 className="logo-text">MatchDay</h1>
+            <h1 className="logo-text">Fixtures</h1>
           </div>
           <div className="season-badge">Season {season}</div>
         </div>
@@ -125,7 +126,9 @@ function Fixtures() {
                           })}
                         </td>
                         <td className={`team-cell home-cell ${result === 'home' ? 'winner' : result === 'away' ? 'loser' : ''}`}>
-                          <span className="team-name">{f.teams.home.name}</span>
+                          <NavLink to={`/team/${f.teams.home.id}?league=${league}&season=${season}`}>
+                            {f.teams.home.name}
+                          </NavLink>
                         </td>
                         <td className="score-cell">
                           {f.goals.home !== null ? (
@@ -139,7 +142,9 @@ function Fixtures() {
                           )}
                         </td>
                         <td className={`team-cell away-cell ${result === 'away' ? 'winner' : result === 'home' ? 'loser' : ''}`}>
-                          <span className="team-name">{f.teams.away.name}</span>
+                          <NavLink to={`/team/${f.teams.away.id}?league=${league}&season=${season}`}>
+                            {f.teams.away.name}
+                          </NavLink>
                         </td>
                         <td className="venue-cell">{f.fixture.venue.name}</td>
                         <td className="status-cell">
