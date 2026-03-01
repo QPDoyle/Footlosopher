@@ -9,14 +9,15 @@
   --surface:   #111318;
   --surface2:  #181c24;
   --border:    rgba(255,255,255,0.07);
-  --accent:    #00e5ff;
+  --accent:    #049C63;
   --accent2:   #ff3d71;
   --win:       #00e676;
   --lose:      #ff3d71;
+  --draw:      #aaa;
   --text:      #e8eaf0;
   --muted:     #5a6070;
   --font-head: 'Oswald', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+  --font-body: 'Oswald', sans-serif;
   --radius:    10px;
 }
 
@@ -89,7 +90,7 @@ body {
 .logo-text {
   font-family: var(--font-head);
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
@@ -105,7 +106,7 @@ body {
 .nav-links a {
   font-family: var(--font-head);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 550;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams} from 'react-router-dom';
+import './Fixtures.css';
 
 function TeamLogo({ team_id }) {
   return <img src={`https://media.api-sports.io/football/teams/${team_id}.png`} alt="Team Logo" />;
@@ -38,6 +39,11 @@ function TeamStats() {
     <div>
       <TeamLogo team_id={teamId} />
       <h1>{stats.team.name}</h1>
+      <div>
+        <h2> Season: {season}</h2>
+      </div>
+
+
       <pre>{JSON.stringify(stats, null, 2)}</pre>
     </div>
   );
