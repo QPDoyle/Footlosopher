@@ -7,7 +7,8 @@ function Fixtures() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [league, setLeague] = useState("39");
-  const season = 2024;
+  const [season, setSeason] = useState(2024);
+  const seasons = [2024, 2023, 2022];
 
   const leagueNames = {
     "39": "Premier League",
@@ -54,7 +55,15 @@ function Fixtures() {
             <span className="logo-dot" />
             <h1 className="logo-text">Fixtures</h1>
           </div>
-          <div className="season-badge">Season {season}</div>
+          <select
+            className="season-badge season-select"
+            value={season}
+            onChange={(e) => setSeason(Number(e.target.value))}
+          >
+            {seasons.map(s => (
+              <option key={s} value={s}>Season {s}</option>
+            ))}
+          </select>
         </div>
       </header>
 
