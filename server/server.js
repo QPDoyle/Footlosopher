@@ -42,6 +42,41 @@ app.get("/api/fixtures", async (req, res) => {
     }
   });
 
+app.get("/api/teams", async (req, res) => {
+    try {
+      const response = await axios.get('https://v3.football.api-sports.io/teams', {
+        headers: {
+          'x-apisports-key': process.env.API_KEY
+        },
+        params: {
+          league: req.query.league,
+          season: req.query.season
+        }
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch teams' });
+    }
+  });
+
+  app.get("/api/squad/:teamId", async (req, res) => {
+    try {
+      const response = await axios.get('https://v3.football.api-sports.io/players/squads', {
+        headers: {
+          'x-apisports-key': process.env.API_KEY
+        },
+        params: {
+          team: req.params.teamId
+        }
+      });
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch squad' });
+    }
+  });
+
 app.listen(5001, () => {
   console.log('Server is running on port 5001')
 });

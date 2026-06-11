@@ -1,0 +1,132 @@
+/* ─── Teams Grid ─── */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 10px;
+  cursor: pointer;
+  font-family: var(--font-head);
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.team-card:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
+}
+
+.team-card.active {
+  border-color: var(--accent);
+  background: rgba(4,156,99,0.1);
+  box-shadow: 0 0 16px rgba(4,156,99,0.2);
+}
+
+.team-card-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.team-card-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ─── Squad ─── */
+.squad-wrapper {
+  padding: 0 0 1.5rem;
+}
+
+.squad-group {
+  padding: 1rem 20px 0;
+}
+
+.squad-group-title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.player-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  animation: fadeSlideIn 0.35s ease both;
+}
+
+.player-photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.player-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.player-number {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 700px) {
+  .teams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
+}
