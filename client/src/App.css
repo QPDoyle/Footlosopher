@@ -71,6 +71,13 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.header-left:hover {
+  filter: brightness(0.75);
 }
 
 .logo-dot {

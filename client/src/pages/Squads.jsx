@@ -94,7 +94,7 @@ function Squads() {
             onChange={(e) => setSeason(Number(e.target.value))}
           >
             {seasons.map(s => (
-              <option key={s} value={s}>Season {s}</option>
+              <option key={s} value={s}>{s}</option>
             ))}
           </select>
         </div>

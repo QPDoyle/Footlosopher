@@ -11,12 +11,11 @@ import Squads from './pages/Squads';
 const Navigation = () => (
   <nav className="header">
     <div className="header-inner">
-      <div className="header-left">
+      <NavLink to='/Home' className="header-left">
         <span className="logo-dot" />
         <span className="logo-text">Footlosopher</span>
-      </div>
+      </NavLink>
       <ul className="nav-links">
-        <li><NavLink to='/Home'>Home</NavLink></li>
         <li><NavLink to='/About'>About</NavLink></li>
         <li><NavLink to='/Fixtures'>Fixtures</NavLink></li>
         <li><NavLink to='/Squads'>Squads</NavLink></li>
