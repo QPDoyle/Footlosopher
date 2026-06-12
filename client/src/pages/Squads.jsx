@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Fixtures.css';
 import './Squads.css';
 
@@ -35,7 +36,7 @@ function Squads() {
           setTeams(data.response);
         } else {
           setTeams([]);
-          setTeamsError('No team data available.');
+          setTeamsError(data.error || 'No team data available.');
         }
         setLoadingTeams(false);
       })
@@ -46,18 +47,18 @@ function Squads() {
       });
   };
 
-  const fetchSquad = (team) => {
+  const fetchSquad = (team, squadSeason) => {
     setSelectedTeam(team);
     setSquad(null);
     setLoadingSquad(true);
     setSquadError(null);
-    fetch(`/api/squad/${team.id}`)
+    fetch(`/api/squad/${team.id}?season=${squadSeason}`)
       .then(res => res.json())
       .then(data => {
-        if (data.response && data.response.length > 0) {
+        if (data.response && data.response.length > 0 && data.response[0].players?.length > 0) {
           setSquad(data.response[0]);
         } else {
-          setSquadError('No squad data available.');
+          setSquadError(data.error || 'No squad data available.');
         }
         setLoadingSquad(false);
       })
@@ -67,6 +68,14 @@ function Squads() {
         setLoadingSquad(false);
       });
   };
+
+  // Re-fetch the squad for the newly selected season when it changes.
+  useEffect(() => {
+    if (selectedTeam) {
+      fetchSquad(selectedTeam, season);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [season]);
 
   const groupedPlayers = () => {
     if (!squad) return {};
@@ -94,7 +103,7 @@ function Squads() {
             onChange={(e) => setSeason(Number(e.target.value))}
           >
             {seasons.map(s => (
-              <option key={s} value={s}>{s}</option>
+              <option key={s} value={s}>{s}/{s + 1}</option>
             ))}
           </select>
         </div>
@@ -145,7 +154,7 @@ function Squads() {
               <button
                 key={team.id}
                 className={`team-card ${selectedTeam?.id === team.id ? 'active' : ''}`}
-                onClick={() => fetchSquad(team)}
+                onClick={() => fetchSquad(team, season)}
               >
                 <img className="team-card-logo" src={team.logo} alt={team.name} />
                 <span className="team-card-name">{team.name}</span>
@@ -178,7 +187,11 @@ function Squads() {
                 <h3 className="squad-group-title">{position}s</h3>
                 <div className="players-grid">
                   {groupedPlayers()[position].map(player => (
-                    <div className="player-card" key={player.id}>
+                    <NavLink
+                      className="player-card"
+                      key={player.id}
+                      to={`/player/${player.id}?season=${season}&team=${squad.team.id}`}
+                    >
                       <img className="player-photo" src={player.photo} alt={player.name} />
                       <div className="player-info">
                         <span className="player-name">{player.name}</span>
@@ -187,7 +200,7 @@ function Squads() {
                           {player.age != null && <span className="player-age">Age {player.age}</span>}
                         </span>
                       </div>
-                    </div>
+                    </NavLink>
                   ))}
                 </div>
               </div>

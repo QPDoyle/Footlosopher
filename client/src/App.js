@@ -7,6 +7,7 @@ import About from './pages/About';
 import Fixtures from './pages/Fixtures';
 import TeamStats from './pages/TeamStats';
 import Squads from './pages/Squads';
+import PlayerProfile from './pages/PlayerProfile';
 
 const Navigation = () => (
   <nav className="header">
@@ -31,6 +32,7 @@ const Main = () => (
     <Route path='/Fixtures' element={<Fixtures />} />
     <Route path='/Squads' element={<Squads />} />
     <Route path='/team/:teamId' element={<TeamStats />} />
+    <Route path='/player/:playerId' element={<PlayerProfile />} />
   </Routes>
 );
 

@@ -109,7 +109,7 @@
   -moz-appearance: none;
   text-align: center;
   text-align-last: center;
-  width: 55px;
+  width: 80px;
   min-width: 0;
   transition: background 0.2s, color 0.2s;
 }

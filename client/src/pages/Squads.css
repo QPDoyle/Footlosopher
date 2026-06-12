@@ -80,6 +80,15 @@
   border-radius: var(--radius);
   padding: 10px 14px;
   animation: fadeSlideIn 0.35s ease both;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+
+.player-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .player-photo {
