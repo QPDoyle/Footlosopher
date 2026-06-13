@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams, NavLink } from 'react-router-dom';
 import './Fixtures.css';
 import './PlayerProfile.css';
+import 'mathjs';
+
 
 function PlayerProfile() {
   const { playerId } = useParams();
@@ -50,7 +52,6 @@ function PlayerProfile() {
   return (
     <div className="app">
       <div className="noise" />
-
       <header className="header">
         <div className="header-inner">
           <div className="header-left">
@@ -84,7 +85,7 @@ function PlayerProfile() {
               <img className="player-profile-photo" src={player.photo} alt={player.name} />
               <div className="player-profile-info">
                 <div className="player-profile-name-row">
-                  <h2>{player.name}</h2>
+                  <h2>{player.firstname + " " + player.lastname}</h2>
                   {currentClub && (
                     <span className="club-badge">
                       <img className="club-badge-logo" src={currentClub.team.logo} alt={currentClub.team.name} />
@@ -93,9 +94,9 @@ function PlayerProfile() {
                   )}
                 </div>
                 <div className="player-profile-meta">
-                  {player.nationality && <span>{player.nationality}</span>}
+                  {statistics[0].team.name && <span>{statistics[0].team.name}</span>}
                   {player.age != null && <span>Age {player.age}</span>}
-                  {player.height && <span>{player.height}</span>}
+                  {player.height && <span>{String(Math.trunc(player.height/2.54/12)) + "\'" + String(Math.round((player.height/2.54/12 - Math.trunc(player.height/2.54/12)) * 12)) + "\""}</span>}
                 </div>
               </div>
             </div>
