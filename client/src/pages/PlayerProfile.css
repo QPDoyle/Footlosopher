@@ -87,6 +87,16 @@
   margin-bottom: 1.5rem;
 }
 
+.player-info-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 700px) {
+  .player-info-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
 .stats-header-team {
   display: flex;
   align-items: center;
